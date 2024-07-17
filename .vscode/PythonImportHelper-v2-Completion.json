@@ -1,0 +1,125 @@
+[
+    {
+        "label": "DictWriter",
+        "importPath": "csv",
+        "description": "csv",
+        "isExtraImport": true,
+        "detail": "csv",
+        "documentation": {}
+    },
+    {
+        "label": "DictReader",
+        "importPath": "csv",
+        "description": "csv",
+        "isExtraImport": true,
+        "detail": "csv",
+        "documentation": {}
+    },
+    {
+        "label": "exists",
+        "importPath": "os.path",
+        "description": "os.path",
+        "isExtraImport": true,
+        "detail": "os.path",
+        "documentation": {}
+    },
+    {
+        "label": "NameError",
+        "kind": 6,
+        "importPath": "HomeWork",
+        "description": "HomeWork",
+        "peekOfCode": "class NameError(Exception):\n        # Класс для пользовательского исключения, указывающего на ошибку ввода имени или фамилии.\n        def __init__(self, txt):\n            self.txt = txt\ndef get_data():\n    \"\"\"\n    Создание и возвращение данных о пользователе.\n    \"\"\"\n    flag = False\n    while not flag:",
+        "detail": "HomeWork",
+        "documentation": {}
+    },
+    {
+        "label": "get_data",
+        "kind": 2,
+        "importPath": "HomeWork",
+        "description": "HomeWork",
+        "peekOfCode": "def get_data():\n    \"\"\"\n    Создание и возвращение данных о пользователе.\n    \"\"\"\n    flag = False\n    while not flag:\n        try:\n            first_name = input(\"Введите имя: \")\n            if len(first_name) < 2:\n                raise NameError(\"Слишком короткое имя\")",
+        "detail": "HomeWork",
+        "documentation": {}
+    },
+    {
+        "label": "create_file",
+        "kind": 2,
+        "importPath": "HomeWork",
+        "description": "HomeWork",
+        "peekOfCode": "def create_file(filename):\n    \"\"\"\n    Создание нового файла и запись в него заголовков колонок.\n    Если файл существует, он будет перезаписан.\n    \"\"\"\n    with open(filename, 'w', encoding='utf-8') as data:\n        f_w = DictWriter(data, fieldnames=['Имя', 'Фамилия', 'Телефон'])\n        f_w.writeheader()\ndef read_file(filename):\n    \"\"\"",
+        "detail": "HomeWork",
+        "documentation": {}
+    },
+    {
+        "label": "read_file",
+        "kind": 2,
+        "importPath": "HomeWork",
+        "description": "HomeWork",
+        "peekOfCode": "def read_file(filename):\n    \"\"\"\n    Чтение содержимого файла и возвращение его в виде списка словарей.\n    \"\"\"\n    with open(filename, 'r', encoding='utf-8') as data:\n        f_r = DictReader(data)\n        return list(f_r)\ndef write_file(filename, lst):\n    \"\"\"\n    Чтение содержимого файла, добавление новой записи и перезапись файла.",
+        "detail": "HomeWork",
+        "documentation": {}
+    },
+    {
+        "label": "write_file",
+        "kind": 2,
+        "importPath": "HomeWork",
+        "description": "HomeWork",
+        "peekOfCode": "def write_file(filename, lst):\n    \"\"\"\n    Чтение содержимого файла, добавление новой записи и перезапись файла.\n    \"\"\"\n    res = read_file(filename)\n    obj = {'Имя': lst[0], 'Фамилия': lst[1], 'Телефон': lst[2]}\n    res.append(obj)\n    with open(filename, 'w', encoding='utf-8') as data:\n        f_w = DictWriter(data, fieldnames=['Имя', 'Фамилия', 'Телефон'])\n        f_w.writeheader()",
+        "detail": "HomeWork",
+        "documentation": {}
+    },
+    {
+        "label": "row_search",
+        "kind": 2,
+        "importPath": "HomeWork",
+        "description": "HomeWork",
+        "peekOfCode": "def row_search(filename):\n    \"\"\"\n    Поиск записи по фамилии и вывод её на экран.\n    Если запись не найдена, вывод соответствующего сообщения.\n    \"\"\"\n    last_name = input(\"Введите фамилию: \")\n    res = read_file(filename)\n    for row in res:\n        if last_name == row['Фамилия']:\n            print(row)",
+        "detail": "HomeWork",
+        "documentation": {}
+    },
+    {
+        "label": "delete_row",
+        "kind": 2,
+        "importPath": "HomeWork",
+        "description": "HomeWork",
+        "peekOfCode": "def delete_row(filename):\n    \"\"\"\n    Удаление записи по фамилии и перезапись файла без этой записи.\n    \"\"\"\n    last_name = input(\"Введите фамилию для удаления: \")\n    res = read_file(filename)\n    new_res = [row for row in res if row['Фамилия'] != last_name]\n    with open(filename, 'w', encoding='utf-8') as data:\n        f_w = DictWriter(data, fieldnames=['Имя', 'Фамилия', 'Телефон'])\n        f_w.writeheader()",
+        "detail": "HomeWork",
+        "documentation": {}
+    },
+    {
+        "label": "change_row",
+        "kind": 2,
+        "importPath": "HomeWork",
+        "description": "HomeWork",
+        "peekOfCode": "def change_row(filename):\n    \"\"\"\n    Поиск записи по фамилии и изменение её данных.\n    Если запись не найдена, вывод соответствующего сообщения.\n    \"\"\"\n    last_name = input(\"Введите фамилию для изменения: \")\n    res = read_file(filename)\n    found = False\n    for row in res:\n        if row['Фамилия'] == last_name:",
+        "detail": "HomeWork",
+        "documentation": {}
+    },
+    {
+        "label": "copy_file",
+        "kind": 2,
+        "importPath": "HomeWork",
+        "description": "HomeWork",
+        "peekOfCode": "def copy_file(src_filename, dest_filename):\n    \"\"\"\n    Копирование данных из одного файла в другой.\n    \"\"\"\n    if not exists(src_filename):\n        print(\"Исходный файл не существует.\")\n        return\n    data = read_file(src_filename)\n    with open(dest_filename, 'w', encoding='utf-8') as data_file:\n        f_w = DictWriter(data_file, fieldnames=['Имя', 'Фамилия', 'Телефон'])",
+        "detail": "HomeWork",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "HomeWork",
+        "description": "HomeWork",
+        "peekOfCode": "def main():\n    \"\"\"\n    Основная функция, обрабатывающая команды пользователя для взаимодействия с телефонной книгой.\n    \"\"\"\n    if not exists(filename):\n        create_file(filename)\n        print(\"Файл не существует, создайте его\")\n    while True:\n        command = input(\"Введите команду (q - выход, w - запись, r - чтение, f - поиск, d - удаление, c - изменение): \")\n        if command == 'q':",
+        "detail": "HomeWork",
+        "documentation": {}
+    },
+    {
+        "label": "filename",
+        "kind": 5,
+        "importPath": "HomeWork",
+        "description": "HomeWork",
+        "peekOfCode": "filename = 'phone.csv'\ndef copy_file(src_filename, dest_filename):\n    \"\"\"\n    Копирование данных из одного файла в другой.\n    \"\"\"\n    if not exists(src_filename):\n        print(\"Исходный файл не существует.\")\n        return\n    data = read_file(src_filename)\n    with open(dest_filename, 'w', encoding='utf-8') as data_file:",
+        "detail": "HomeWork",
+        "documentation": {}
+    }
+]
